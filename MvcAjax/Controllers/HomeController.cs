@@ -88,14 +88,14 @@ namespace MvcAjax.Controllers
             //    BirthDate = Employee.BirthDate.ToString(),
             //    HireDate = Employee.HireDate.ToString()                 
             //};
-            var model = db.Employees
+            //var model = db.Employees
             //ListEmp = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
             //int totalRow = ListEmp.Count;
 
             return Json(new
             {
                 data = ListEmp,
-                status = true                 
+                status = true
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -121,7 +121,8 @@ namespace MvcAjax.Controllers
             //save db
             var entity = ListEmp.Single(x => x.ID == emp.ID);
             entity.Salary = emp.Salary;
-            return Json(new {
+            return Json(new
+            {
                 status = true
             });
         }
@@ -143,5 +144,5 @@ namespace MvcAjax.Controllers
                 status = true
             });
         }
-    }    
+    }
 }
