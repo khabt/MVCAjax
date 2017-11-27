@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+@section scripts{
+
+    <script src="~/Scripts/mustache.js"></script>
+    <script src="~/Scripts/jquery.twbsPagination-1.3.1.min.js"></script>
+    <script src="~/Scripts/controller/homeController.js"></script>
+
+}
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Name</td>
+                <td>Salary</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody id="tblData"></tbody>
+    </table>
+</div>
+<div id="pagination" class="pagination">
+
+</div>
+
+<hr />
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>EmployeeID</td>
+                <td>FullName</td>
+                <td>LastName</td>
+                <td>FirstName</td>
+                <td>Title</td>
+                <td>sex</td>
+                <td>BirthDate</td>
+                <td>HireDate</td>
+            </tr>
+        </thead>
+        <tbody id="tblDataDB"></tbody>
+    </table>
+</div>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <tr>
+        <td>{{ID}}</td>
+        <td>{{Name}}</td>
+        <td><input type="number" data-id="{{ID}}" value="{{Salary}}" id="txtSalary" /></td>
+        <td>{{{Status}}}</td>
+    </tr>
+</script>
+
+<script id="data-templatedb" type="x-tmpl-mustache">
+    <tr>
+        <td>{{EmployeeID}}</td>
+        <td><input type="text" data-id="{{EmployeeID}}" value="{{FullName}}" id="txtFullName" /></td>
+        <td>{{LastName}}</td>
+        <td><input type="text" data-id="{{EmployeeID}}" value="{{FirstName}}" id="txtFirstName" /></td>
+        <td>{{Title}}</td>
+        <td>{{Sex}}</td>
+        <td><input type="datetime" value="{{BirthDate}}" id="txtBirthDate" /></td>
+        <td>{{HireDate}}</td>
+    </tr>
+</script>
+
+@*<script type="text/javascript">
+        $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+    </script>*@   
