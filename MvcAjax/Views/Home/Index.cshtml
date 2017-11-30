@@ -8,19 +8,27 @@
     <script src="~/Scripts/controller/homeController.js"></script>
 
 }
+<div class="row">
+    <div class="col-md-12">
+        <button id="btnAddNew" class="btn btn-success">Add New</button>
+    </div>
+</div>
 
 <div class="row">
-    <table class="table">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Salary</td>
-                <td>Status</td>
-            </tr>
-        </thead>
-        <tbody id="tblData"></tbody>
-    </table>
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Salary</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody id="tblData"></tbody>
+        </table>
+    </div>
+    
 </div>
 <div id="pagination" class="pagination">
 
@@ -29,21 +37,24 @@
 <hr />
 
 <div class="row">
-    <table class="table">
-        <thead>
-            <tr>
-                <td>EmployeeID</td>
-                <td>FullName</td>
-                <td>LastName</td>
-                <td>FirstName</td>
-                <td>Title</td>
-                <td>sex</td>
-                <td>BirthDate</td>
-                <td>HireDate</td>
-            </tr>
-        </thead>
-        <tbody id="tblDataDB"></tbody>
-    </table>
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>EmployeeID</td>
+                    <td>FullName</td>
+                    <td>LastName</td>
+                    <td>FirstName</td>
+                    <td>Title</td>
+                    <td>sex</td>
+                    <td>BirthDate</td>
+                    <td>HireDate</td>
+                </tr>
+            </thead>
+            <tbody id="tblDataDB"></tbody>
+        </table>
+    </div>
+    
 </div>
 <div id="paginationDB" class="pagination">
 
@@ -71,6 +82,38 @@
     </tr>
 </script>
 
-@*<script type="text/javascript">
-        $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
-    </script>*@   
+ <!-- Modal -->
+<div class="modal fade" id="modalAddUpdate" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/Update</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="txtName">Name:</label>
+                        <input type="text" class="form-control" id="txtName">
+                        <input type="hidden" id="hidD" value="0"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSalary">Salary:</label>
+                        <input type="number" class="form-control" id="txtSalary">
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" id="ckStatus">Active</label>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnSave">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

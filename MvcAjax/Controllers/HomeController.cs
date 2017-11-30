@@ -1,5 +1,6 @@
 ﻿using AjaxTableData;
 using MvcAjax.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -118,7 +119,7 @@ namespace MvcAjax.Controllers
             //var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
             //int totalRow = ListEmp.Count;
 
-            var model = _context.Employees.OrderBy(x =>x.ID).Skip((page - 1) * pageSize).Take(pageSize);
+            var model = _context.Employees.OrderByDescending(x =>x.ID).Skip((page - 1) * pageSize).Take(pageSize);
             int totalRow = _context.Employees.Count();
 
             return Json(new
@@ -161,5 +162,58 @@ namespace MvcAjax.Controllers
         //        status = true
         //    });
         //}
+
+        [HttpPost]
+        public JsonResult SaveData(string StrEmployee)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            Employees emp = serializer.Deserialize<Employees>(StrEmployee);
+
+            bool status = false;
+            string message = string.Empty;
+            //add new db
+            if (emp.ID == 0)
+            {
+                emp.CreateDate = DateTime.Now;
+                _context.Employees.Add(emp);
+                try
+                {
+                    _context.SaveChanges();
+                    status = true;
+                }
+                catch (Exception ex)
+                {
+
+                    status = false;
+                    message = ex.Message;
+                }
+            }
+            else
+            {
+                //save db
+                var entity = _context.Employees.Find(emp.ID);
+                entity.Name = emp.Name;
+                entity.Salary = emp.Salary;
+                entity.Status = emp.Status;
+                try
+                {
+                    _context.SaveChanges();
+                    status = true;
+                }
+                catch (Exception ex)
+                {
+
+                    status = false;
+                    message = ex.Message;
+                }
+
+            }
+
+            return Json(new
+            {
+                status = status,
+                message = message
+            });
+        }
     }
 }

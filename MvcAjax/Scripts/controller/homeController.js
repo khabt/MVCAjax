@@ -1,5 +1,5 @@
 ﻿var homeConfig = {
-    pageSize: 5,
+    pageSize: 12,
     pageIndex: 1,
 }
 
@@ -18,13 +18,61 @@ var homeController = {
             }
         });
 
-        $('#txtFirstName').off('keypress').on('keypress', function (e) {
-            if (e.which === 13) {
-                var id = $(this).data('id');
-                var value = $(this).val();
-                homeController.updateName(id, value, "KAAAAAA");
+        //$('#txtFirstName').off('keypress').on('keypress', function (e) {
+        //    if (e.which === 13) {
+        //        var id = $(this).data('id');
+        //        var value = $(this).val();
+        //        homeController.updateName(id, value, "KAAAAAA");
+        //    }
+        //})
+        $("#btnAddNew").off('click').on('click', function () {
+            $("#modalAddUpdate").modal('show');
+            homeController.resetForm();
+        });
+
+        $('#btnSave').off('click').on('click', function () {
+            homeController.saveData();
+        })
+    },
+    saveData: function () {
+        var name = $('#txtName').val();
+        var salary = parseFloat($('#txtSalary').val());
+        var status = $('#ckStatus').prop('checked');
+        var id = parseInt($('#hidD').val());
+
+        var employee = {
+            Name: name,
+            Salary: salary,
+            Status: status,
+            ID: id
+        }
+        $.ajax({
+            url: '/Home/SaveData',
+            data: {
+                StrEmployee: JSON.stringify(employee)
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (status == true) {
+                    alert('Success');
+                    $("#modalAddUpdate").modal('hide');
+                    homeController.loadData();
+                }
+                else {
+                    alert(response.Message);
+                }
+            },
+            error: function (err) {
+                console.log(err);
             }
         })
+    },
+    resetForm: function () {
+        $('#hidID').val('0');
+        $('#txtName').val('');
+        $('txtSalary').val(0);
+        $('#ckStatus').prop('checked', true);
     },
     loadData: function () {
         $.ajax({
