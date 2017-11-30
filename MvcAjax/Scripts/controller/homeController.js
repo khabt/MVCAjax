@@ -1,5 +1,5 @@
 ﻿var homeConfig = {
-    pageSize: 3,
+    pageSize: 5,
     pageIndex: 1,
 }
 
@@ -11,7 +11,7 @@ var homeController = {
     },
     registerEvent: function () {
         $('#txtSalary').off('keypress').on('keypress', function (e) {
-            if (e.which == 13) {
+            if (e.which === 13) {
                 var id = $(this).data('id');
                 var value = $(this).val();
                 homeController.updateSalary(id, value);
@@ -19,7 +19,7 @@ var homeController = {
         });
 
         $('#txtFirstName').off('keypress').on('keypress', function (e) {
-            if (e.which == 13) {
+            if (e.which === 13) {
                 var id = $(this).data('id');
                 var value = $(this).val();
                 homeController.updateName(id, value, "KAAAAAA");
@@ -46,7 +46,7 @@ var homeController = {
                             ID: item.ID,
                             Name: item.Name,
                             Salary: item.Salary,
-                            Status: item.Status == true ? "<span class=\"label label-success\">Active</span>" : "<span class=\"label label-danger\">Locked</span>"
+                            Status: item.Status === true ? "<span class=\"label label-success\">Active</span>" : "<span class=\"label label-danger\">Locked</span>"
                         });
                     });
                     $('#tblData').html(html);

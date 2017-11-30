@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AjaxTableData
 {
-    [Table("Emplyees")]
+    [Table("Employees")]
     public class Employees
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -21,8 +21,9 @@ namespace AjaxTableData
         
         public double Salary { get; set; }
 
-        [Required]
-        public DateTime Create { get; set; }
+        [Required] 
+        [Column("CreateDate")]      
+        public DateTime CreateDate { get; set; }
 
         public bool Status { set; get; }
     }

@@ -7,13 +7,13 @@ namespace AjaxTableData.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CreatedDB : IMigrationMetadata
+    public sealed partial class CreateDateDatedDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatedDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDateDatedDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201711300208101_CreatedDB"; }
+            get { return "201711300208101_CreateDateDatedDB"; }
         }
         
         string IMigrationMetadata.Source

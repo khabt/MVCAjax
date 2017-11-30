@@ -100,6 +100,7 @@ namespace MvcAjax.Controllers
 
             //var ListEmp = db.Employees.Skip((page - 1) * pageSize).Take(pageSize);
             //ListEmp.len;
+
             var model = _context.Employees.Skip((page - 1) * pageSize).Take(pageSize);
             int totalRow = _context.Employees.Count();
 
@@ -117,7 +118,7 @@ namespace MvcAjax.Controllers
             //var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
             //int totalRow = ListEmp.Count;
 
-            var model = _context.Employees.Skip((page - 1) * pageSize).Take(pageSize);
+            var model = _context.Employees.OrderBy(x =>x.ID).Skip((page - 1) * pageSize).Take(pageSize);
             int totalRow = _context.Employees.Count();
 
             return Json(new
@@ -132,10 +133,10 @@ namespace MvcAjax.Controllers
         public JsonResult Update(string model)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            EmpModel emp = serializer.Deserialize<EmpModel>(model);
+            Employees emp = serializer.Deserialize<Employees>(model);
 
             //save db
-            var entity = ListEmp.Single(x => x.ID == emp.ID);
+            var entity = _context.Employees.Find(emp.ID);
             entity.Salary = emp.Salary;
             return Json(new
             {
