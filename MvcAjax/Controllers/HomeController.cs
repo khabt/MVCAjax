@@ -1,8 +1,7 @@
-﻿using MvcAjax.Models;
-using System;
+﻿using AjaxTableData;
+using MvcAjax.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -10,7 +9,14 @@ namespace MvcAjax.Controllers
 {
     public class HomeController : Controller
     {
-        NorthwindEntities1 db = new NorthwindEntities1();
+        #region database
+        //NorthwindEntities1 db = new NorthwindEntities1();
+        private EmployeeDBContext _context;
+        public HomeController()
+        {
+            _context = new EmployeeDBContext();
+        }
+        #region data hardcode
         List<EmpModel> ListEmp = new List<EmpModel>() {
             new EmpModel()
             {
@@ -69,6 +75,8 @@ namespace MvcAjax.Controllers
                 Status = true
             }
         };
+        #endregion
+        #endregion
 
         public ActionResult Index()
         {
@@ -76,34 +84,42 @@ namespace MvcAjax.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadDataFromData()
+        public JsonResult LoadDataFromData(int page, int pageSize)
         {
-            //var ListEmp = from Employee in db.Employees select new
-            //{
-            //    EmployeeID = Employee.EmployeeID,
-            //    LastName = Employee.LastName,
-            //    FirstName = Employee.FirstName,
-            //    Title = Employee.Title,
-            //    Sex = Employee.TitleOfCourtesy,
-            //    BirthDate = Employee.BirthDate.ToString(),
-            //    HireDate = Employee.HireDate.ToString()                 
-            //};
-            //var model = db.Employees
-            //ListEmp = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
+            //var model = db.Employees.Skip((page - 1) * pageSize).Take(pageSize);
+            //int totalRow = db.Employees.Count();
+
+            //List<Employee> ListEmp = (from Employee in db.Employees
+            //                          select Employee).ToList();
             //int totalRow = ListEmp.Count;
+            //var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
+            //ListEmp = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
+
+            //ListEmp = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
+            //int totalRow = ;
+
+            //var ListEmp = db.Employees.Skip((page - 1) * pageSize).Take(pageSize);
+            //ListEmp.len;
+            var model = _context.Employees.Skip((page - 1) * pageSize).Take(pageSize);
+            int totalRow = _context.Employees.Count();
 
             return Json(new
             {
-                data = ListEmp,
-                status = true
+                data = model,
+                status = true,
+                total = totalRow
             }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public JsonResult LoadData(int page, int pageSize)
         {
-            var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
-            int totalRow = ListEmp.Count;
+            //var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
+            //int totalRow = ListEmp.Count;
+
+            var model = _context.Employees.Skip((page - 1) * pageSize).Take(pageSize);
+            int totalRow = _context.Employees.Count();
+
             return Json(new
             {
                 data = model,
@@ -127,22 +143,22 @@ namespace MvcAjax.Controllers
             });
         }
 
-        [HttpPost]
-        public JsonResult UpdateName(string model)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            Employee emp = serializer.Deserialize<Employee>(model);
+        //[HttpPost]
+        //public JsonResult UpdateName(string model)
+        //{
+        //    JavaScriptSerializer serializer = new JavaScriptSerializer();
+        //    Employee emp = serializer.Deserialize<Employee>(model);
 
-            //save db
-            var entity = db.Employees.Single(x => x.EmployeeID == emp.EmployeeID);
-            entity.FirstName = emp.FirstName;
-            entity.LastName = emp.LastName;
-            //db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
-            return Json(new
-            {
-                status = true
-            });
-        }
+        //    //save db
+        //    var entity = db.Employees.Single(x => x.EmployeeID == emp.EmployeeID);
+        //    entity.FirstName = emp.FirstName;
+        //    entity.LastName = emp.LastName;
+        //    //db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+        //    db.SaveChanges();
+        //    return Json(new
+        //    {
+        //        status = true
+        //    });
+        //}
     }
 }

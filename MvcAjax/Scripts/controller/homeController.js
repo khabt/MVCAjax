@@ -80,6 +80,10 @@ var homeController = {
         $.ajax({
             url: '/Home/LoadDataFromData',
             type: 'GET',
+            data: {
+                page: homeConfig.pageIndex,
+                pageSize: homeConfig.pageSize
+            },
             dataType: 'json',
             success: function (response) {
                 if (response.status) {
@@ -100,6 +104,9 @@ var homeController = {
                         });
                     });
                     $('#tblDataDB').html(html);
+                    homeController.pagingDB(response.total, function () {
+                        homeController.loadDataFromDB();
+                    })
 
                 }
             }
@@ -127,6 +134,21 @@ var homeController = {
     paging: function (totalRow, callback) {
         var totalPage = Math.ceil(totalRow / homeConfig.pageSize)
         $('#pagination').twbsPagination({
+            totalPages: totalPage,
+            visiblePages: 10,
+            first: "Đầu",
+            prev: "Trước",
+            next: "Tiếp",
+            last: "Cuối",
+            onPageClick: function (event, page) {
+                homeConfig.pageIndex = page;
+                setTimeout(callback, 200);
+            }
+        });
+    },
+    pagingDB: function (totalRow, callback) {
+        var totalPage = Math.ceil(totalRow / homeConfig.pageSize)
+        $('#paginationDB').twbsPagination({
             totalPages: totalPage,
             visiblePages: 10,
             first: "Đầu",
