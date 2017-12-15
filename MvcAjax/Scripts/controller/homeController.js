@@ -10,6 +10,23 @@ var homeController = {
         homeController.loadDataFromDB();
     },
     registerEvent: function () {
+        $("#frmSaveData").validate({
+            rules: {
+                txtName: {
+                    required: true,
+                     minlength: 3,
+                },
+                txtSalaryEdit: {
+                    required: true,
+                    minlength: 6
+                }
+            },
+            messages: {
+                txtName: "Nhập tên",
+                txtSalaryEdit: "Nhập lương"
+            }
+        });
+
         $('#txtSalary').off('keypress').on('keypress', function (e) {
             if (e.which === 13) {
                 var id = $(this).data('id');
@@ -17,6 +34,13 @@ var homeController = {
                 homeController.updateSalary(id, value);
             }
         });
+
+        $('#txtNameSearch').off('keypress').on('keypress', function (e) {
+            if (e.which === 13) {
+                homeController.loadData(true);
+            }
+        });
+
 
         //$('#txtFirstName').off('keypress').on('keypress', function (e) {
         //    if (e.which === 13) {
@@ -31,12 +55,86 @@ var homeController = {
         });
 
         $('#btnSave').off('click').on('click', function () {
-            homeController.saveData();
+            if ($("#frmSaveData").valid()) {
+                homeController.saveData();
+            }            
+        });
+
+        $('.btn-edit').off('click').on('click', function () {
+            $("#modalAddUpdate").modal('show');
+            var id = $(this).data('id');
+            homeController.loadDetail(id);
+        });
+
+        $('.btn-delete').off('click').on('click', function () {
+            var id = $(this).data('id');
+            bootbox.confirm("Are you sure delete this?", function (result) {                
+                homeController.deleteEmployee(id);
+            });
+        });
+
+        $('#btnSearch').off('click').on('click', function () {
+            homeController.loadData(true);
+        });
+
+        $('#btnReset').off('click').on('click', function () {
+            $("#txtNameSearch").val('');
+            $("#ddlActive").val('');
+            homeController.loadData(true);
+        });
+    },
+    deleteEmployee: function(id){
+        $.ajax({
+            url: '/Home/Delete',
+            data: {
+                id: id
+            },
+            type: 'POST',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status == true) {
+                    bootbox.alert("Delete Success", function () {
+                        $("#modalAddUpdate").modal('hide');
+                        homeController.loadData(true);
+                    });                    
+                }
+                else {
+                    bootbox.alert(response.Message);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    },
+    loadDetail: function (id) {
+        $.ajax({
+            url: '/Home/GetDetail',
+            data: {
+                id: id
+            },
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                if (response.status == true) {
+                    var data = response.data;
+                    $('#hidD').val(data.ID);
+                    $('#txtName').val(data.Name);
+                    $('#txtSalaryEdit').val(data.Salary);
+                    $('#ckStatus').prop('checked', data.Status);
+                }
+                else {
+                    alert(response.Message);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
         })
     },
     saveData: function () {
         var name = $('#txtName').val();
-        var salary = parseFloat($('#txtSalary').val());
+        var salary = parseFloat($('#txtSalaryEdit').val());
         var status = $('#ckStatus').prop('checked');
         var id = parseInt($('#hidD').val());
 
@@ -54,13 +152,15 @@ var homeController = {
             type: 'POST',
             dataType: 'json',
             success: function (response) {
-                if (status == true) {
-                    alert('Success');
-                    $("#modalAddUpdate").modal('hide');
-                    homeController.loadData();
+                if (response.status == true) {
+                    bootbox.alert("Save Success", function () {
+                        $("#modalAddUpdate").modal('hide');
+                        homeController.loadData(true);
+                    })
+                    
                 }
                 else {
-                    alert(response.Message);
+                    bootbox.alert(response.Message);
                 }
             },
             error: function (err) {
@@ -74,11 +174,15 @@ var homeController = {
         $('txtSalary').val(0);
         $('#ckStatus').prop('checked', true);
     },
-    loadData: function () {
+    loadData: function (changePageSize) {
+        var name = $('#txtNameSearch').val();
+        var status = $('#ddlActive').val();
         $.ajax({
             url: '/Home/LoadData',
             type: 'GET',
             data: {
+                name: name,
+                status: status,
                 page: homeConfig.pageIndex,
                 pageSize: homeConfig.pageSize
             },
@@ -100,7 +204,7 @@ var homeController = {
                     $('#tblData').html(html);
                     homeController.paging(response.total, function () {
                         homeController.loadData();
-                    })
+                    }, changePageSize)
                     homeController.registerEvent();
                 }
             }
@@ -118,9 +222,11 @@ var homeController = {
             data: { model: JSON.stringify(data)},
             success: function (response) {
                 if (response.status) {
-                    alert('Update successed');
+                    bootbox.alert('Update success');
                 }
-                else { alert('Update failed');}
+                else {
+                    bootbox.alert(response.Message);
+                }
             }
         })
     },
@@ -179,7 +285,15 @@ var homeController = {
             }
         })
     },
-    paging: function (totalRow, callback) {
+    paging: function (totalRow, callback, changePageSize) {
+
+        if ($('#pagination a').length === 0 || changePageSize === true)
+        {
+            $('#pagination').empty();
+            $('#pagination').removeData('twbs-pagination');
+            $('#pagination').unbind('page');
+        }
+
         var totalPage = Math.ceil(totalRow / homeConfig.pageSize)
         $('#pagination').twbsPagination({
             totalPages: totalPage,

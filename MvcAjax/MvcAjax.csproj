@@ -214,11 +214,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Html\Images\logo_battery.png" />
+    <Content Include="Html\Images\logo_energy.png" />
+    <Content Include="Html\Images\logo_led_lighting.png" />
+    <Content Include="Html\Images\logo_orgin.png" />
+    <Content Include="Html\Images\logo_smartIoT.png" />
+    <Content Include="Html\Images\summary_system_more.png" />
+    <Content Include="Html\Images\summary_system_less.png" />
+    <Content Include="Html\Js\Chart_img.js" />
+    <Content Include="Html\Proposal.html" />
+    <Content Include="Html\Study_Jquery.html" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Html\Proprosal_v1.1.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\controller\homeController.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -235,7 +248,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -269,6 +284,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Home\_AddUpdateModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AjaxTableData\AjaxTableData.csproj">

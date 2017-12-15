@@ -114,13 +114,25 @@ namespace MvcAjax.Controllers
         }
 
         [HttpGet]
-        public JsonResult LoadData(int page, int pageSize)
+        public JsonResult LoadData(string name, string status, int page, int pageSize)
         {
             //var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
             //int totalRow = ListEmp.Count;
+            IQueryable<Employees> model = _context.Employees;
 
-            var model = _context.Employees.OrderByDescending(x =>x.ID).Skip((page - 1) * pageSize).Take(pageSize);
-            int totalRow = _context.Employees.Count();
+            if (!string.IsNullOrEmpty(name)) {
+                model = model.Where(x => x.Name.Contains(name));
+            }
+            if (!string.IsNullOrEmpty(status)) {
+                var statusBool = bool.Parse(status);
+                model = model.Where(x => x.Status == statusBool);
+            }
+            int totalRow = model.Count();
+
+            model = model.OrderByDescending(x =>x.ID).
+                Skip((page - 1) * pageSize)
+                .Take(pageSize);
+            
 
             return Json(new
             {
@@ -139,6 +151,7 @@ namespace MvcAjax.Controllers
             //save db
             var entity = _context.Employees.Find(emp.ID);
             entity.Salary = emp.Salary;
+            _context.SaveChanges();
             return Json(new
             {
                 status = true
@@ -214,6 +227,48 @@ namespace MvcAjax.Controllers
                 status = status,
                 message = message
             });
+        }
+
+        [HttpGet]
+        public JsonResult GetDetail(int id)
+        {
+            //var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
+            //int totalRow = ListEmp.Count;
+
+            var model = _context.Employees.Find(id);
+
+            return Json(new
+            {
+                data = model,                
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult Delete(int id)
+        {
+            //var model = ListEmp.Skip((page - 1) * pageSize).Take(pageSize);
+            //int totalRow = ListEmp.Count;
+
+            var model = _context.Employees.Find(id);
+            _context.Employees.Remove(model);
+            try
+            {
+                _context.SaveChanges();
+                return Json(new
+                {                    
+                    status = true
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = ex.Message
+                });
+            }
+            
         }
     }
 }
