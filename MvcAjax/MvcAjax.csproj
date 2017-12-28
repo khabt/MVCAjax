@@ -214,6 +214,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Html\Images\HE_Quote\battery.png" />
+    <Content Include="Html\Images\HE_Quote\Icon.png" />
+    <Content Include="Html\Images\HE_Quote\LedLighting.png" />
+    <Content Include="Html\Images\HE_Quote\logo.png" />
+    <Content Include="Html\Images\HE_Quote\logo1.png" />
+    <Content Include="Html\Images\HE_Quote\PowerMonitoring.png" />
+    <Content Include="Html\Images\HE_Quote\PowerMonitoring1.png" />
+    <Content Include="Html\Images\HE_Quote\Proposal1.png" />
+    <Content Include="Html\Images\HE_Quote\Proposal2.png" />
+    <Content Include="Html\Images\HE_Quote\smartIoT.png" />
     <Content Include="Html\Images\logo_battery.png" />
     <Content Include="Html\Images\logo_energy.png" />
     <Content Include="Html\Images\logo_led_lighting.png" />
@@ -223,6 +233,8 @@
     <Content Include="Html\Images\summary_system_more.png" />
     <Content Include="Html\Js\Chart_img.js" />
     <Content Include="Html\Proposal.html" />
+    <Content Include="Html\Proposal_Js.html" />
+    <Content Include="Html\Study_Jquery.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

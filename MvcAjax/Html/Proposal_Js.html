@@ -1,0 +1,580 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Proposal</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        .line {
+            background: black;
+            position: relative;
+            height: 4px;
+            width: 80%;
+        }
+
+            .line:before {
+                content: '';
+                background: #cac6c6;
+                width: 60%;
+                height: 4px;
+                position: absolute;
+            }
+
+        .textbold {
+            font-weight: bold;
+        }
+
+        body {
+            font-family: 'Times New Roman';
+            font-size: 16pt;
+        }
+
+        .textitalic {
+            font-style: italic;
+        }
+
+        .textcoloryellow {
+            color: #abab0b;
+        }
+
+        .linedraw {
+            border: 1px solid black;
+            width: 210px;
+        }
+
+        .paddingleft30 {
+            padding-left: 30px;
+        }
+
+        .frameblackcenter {
+            width: 100%;
+            text-align: center;
+            color: white;
+            background-color: black;
+            margin: 0 auto;
+        }
+
+        .frameblackleft {
+            width: 30%;
+            text-align: center;
+            color: white;
+            background-color: #989898;
+        }
+
+        .tableborder {
+            border-bottom: 1px solid black;
+            width: 800px;
+        }
+
+        .textcolorblue {
+            color: #3399FF;
+        }
+
+        .margincenter {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .spacebreak {
+        }
+    </style>
+
+</head>
+
+<body>    
+    <div>
+        <!--<hr style="width: 60%; height: 8px; background: #cac6c6" /><hr style="width: 20%; height: 8px; background: black" />-->
+        <div class="line" style="margin: auto;"></div>
+        <!--<p style="width: 100%; height: 8px;"> <span style="width: 60%; height: 8px; background: #cac6c6"></span> <span style="width: 20%; height: 8px; background: #cac6c6"></span></p>-->
+        <div class="margincenter" style="border-left: 1px solid; padding-left: 15px;">
+            <p>Prepared by:</p>
+            <p class="textcoloryellow"><%=this.FullName %></p>
+            <p><%=this.Phone %>&nbsp;</p>
+            <p><%=this.Email %>&nbsp;</p>
+        </div>
+        <br />
+        <div class="center">
+            <img src="Images/HE_Quote/logo1.png" />
+        </div>
+        <!--<h2 class="center textbold textitalic">THE HONEST ENERGY COMPANY</h2>
+        <p class="center"><sup>____________</sup> INC <sup>____________</sup></p>
+        <p class="center">WHERE HONESTY MEETS QUALITY</p>
+        <br />-->
+        <h3 class="center">A Customized Proposal for:</h3>
+        <h3 class="textcoloryellow center">Zachary Romanak</h3>
+        <h3 class="center">5772 Edinger Ave, Huntington Beach, CA 92649, USA</h3>
+        <br />
+        <br />
+        <div style="margin-top: 665px;">
+            <div class="frameblackcenter" style="width: 100%; padding: 5px 0; height: 100%">
+                <span>THE HONEST ENERGY COMPANY</span><br />
+                <span><%=this.CompanyPhone %></span><br />
+                <span>solar@honestenergy.com</span><br />
+                <span>www.honestenergy.com</span>
+            </div>
+        </div>        
+    </div>
+    <div style="page-break-before: always;">
+        <div class="center">
+            <img src="Images/HE_Quote/logo1.png" />
+        </div>
+        <br />
+        <p class="center textbold" style="font-size: 22pt;">Proposal Summary</p>
+        <!--<p class="textbold textcoloryellow" style="padding-bottom: 10px;">System Summary</p>
+        <p>System Size: 11.12 kW</p>
+        <p>Year 1 Production: 16,566.07 kWh</p>
+        <p>Number of Panels: 10</p>
+        <p>Type of Panels: Solar World 285 Watt Mono Black</p>
+        <p>Inverter Type:</p>
+        <br />
+        <p class="textbold textcoloryellow" style="padding-bottom: 10px;">A Financial Decision Made Easier</p>
+        <p>System Cost: $29,899.35</p>
+        <p>Tax Incentives: -$8,969.81</p>
+        <p class="linedraw"></p>-->
+        <br />
+        <div class="margincenter">
+            <p class="textbold textcoloryellow" style="padding-bottom: 10px;">System Summary</p>
+            <table>
+                <tr>
+                    <td>System Size:</td>
+                    <td class="paddingleft30"><%=this.SystemSize %> kW</td>
+                </tr>
+                <tr>
+                    <td>Year 1 Production:</td>
+                    <td class="paddingleft30"><%=this.Year1Production %> kWh</td>
+                </tr>
+                <tr>
+                    <td>Number of Panels:</td>
+                    <td class="paddingleft30"><%=this.TotalPanel %></td>
+                </tr>
+                <tr>
+                    <td>Type of Panels:</td>
+                    <td class="paddingleft30"><%=this.PanelName %></td>
+                </tr>
+                <tr>
+                    <td>Inverter Type:</td>
+                    <td class="paddingleft30"><%=this.InverterName %></td>
+                </tr>
+            </table>            
+            <p class="textbold textcoloryellow" style="padding-bottom: 10px;">A Financial Decision Made Easier</p>
+            <table>
+                <tr>
+                    <td>System Cost:</td>
+                    <td class="paddingleft30"><%=this.pSystemCost %></td>
+                </tr>
+                <tr>
+                    <td>Tax Incentives:</td>
+                    <td class="paddingleft30">-<%=this.pTaxIncentivesPercent %></td>
+                </tr>
+                <tr>
+                    <td>Local Incentives:</td>
+                    <td class="paddingleft30">-<%=this.pLocalIncentive %></td>
+                </tr>
+            </table>
+            <p class="linedraw"></p>
+            <table>
+                <tr class="textbold">
+                    <td>Cost To You</td>
+                    <td class="paddingleft30"><%=this.pCostToYou %></td>
+                </tr>
+                <tr>
+                    <td>Payback Period</td>
+                    <td class="paddingleft30"><%=this.pPaybackPeriod %> years</td>
+                </tr>
+            </table>
+            <p class="textbold textcoloryellow">Start Date</p>
+            <p><%=this.CreatedDate %></p>
+        </div>
+        <br />
+    </div>
+    <br />
+    <br />
+    <div style="page-break-before: always;">
+        <table style="width: 100%;">
+            <tr>
+                <td colspan="1" style="width: 210px;">
+                    <img src="Images/HE_Quote/logo1.png" style="height: 150px;" />
+                </td>
+                <td class="frameblackcenter" style="font-size: 22pt; background-color: #333131">SYSTEM SUMMARY</td>
+            </tr>
+        </table>
+        <div class="center">
+            <img src="Images/HE_Quote/Summary.png" style="width: 100%" />
+        </div>
+        <div class="center">
+            <img src="Images/HE_Quote/Proposal1.png" style="width: 100%" />
+        </div>
+        <div style="margin-top: 74px;">
+            <div class="frameblackcenter" style="text-align: left;">
+                <table>
+                    <tr>
+                        <td class="textbold textcoloryellow" colspan="4">System Summary</td>
+                    </tr>
+                    <tr>
+                        <td>System Size:</td>
+                        <td style="padding-right: 100px;"><%=this.SystemSize %> kW </td>
+                        <td style="padding-right: 10px;">Type of Panels:</td>
+                        <td><%=this.PanelName %></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 10px;">Year 1 Production:</td>
+                        <td><%=this.Year1Production %> kWh</td>
+                        <td>Inverter Type:</td>
+                        <td><%=this.InverterName %></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Panels:</td>
+                        <td><%=this.TotalPanel %> </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="page-break-before: always;">        
+        <table style="width: 100%;">
+            <tr>
+                <td colspan="1" style="width: 210px;">
+                    <img src="Images/HE_Quote/logo1.png" style="height: 150px;" />
+                </td>
+                <td class="frameblackcenter" style="font-size: 22pt; background-color: #333131">SYSTEM SUMMARY</td>
+            </tr>
+        </table>
+        <div class="center">
+            <img src="Images/HE_Quote/summary.png" style="width: 100%;" />
+        </div>
+        <div class="center">
+            <img src="Images/HE_Quote/Proposal2.png" style="width: 1200px; height: 850px;" />
+        </div>
+        <div>
+            <div class="frameblackcenter" style="text-align: left;">
+                <table>
+                    <tr>
+                        <td class="textbold textcoloryellow" colspan="4">System Summary</td>
+                    </tr>
+                    <tr>
+                        <td>System Size:</td>
+                        <td style="padding-right: 100px;"><%=this.SystemSize %> kW </td>
+                        <td style="padding-right: 10px;">Type of Panels:</td>
+                        <td><%=this.PanelName %></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 10px;">Year 1 Production:</td>
+                        <td><%=this.Year1Production %> kWh</td>
+                        <td>Inverter Type:</td>
+                        <td><%=this.InverterName %></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Panels:</td>
+                        <td><%=this.TotalPanel %> </td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="page-break-before: always;">
+        <table style="width: 100%;">
+            <tr>
+                <td colspan="1" style="width: 210px;">
+                    <img src="Images/HE_Quote/logo1.png" style="height: 150px;" />
+                </td>
+                <td class="frameblackcenter" style="font-size: 22pt; background-color: #333131;">FINANCIAL SUMMARY</td>
+            </tr>
+        </table>
+        <br />
+        <div>
+            <table style="margin: 0 auto;">
+                <tr>
+                    <td></td>
+                    <td>BEFORE</td>
+                    <td>AFTER GOING ELECTRICFIED SOLAR & EV</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray;"></td>
+                </tr>
+                <tr>
+                    <td class="textcoloryellow">Home Electricity Usage</td>
+                    <td><%=this.pHomeElectricBefore %>/month</td>
+                    <td><%=this.pHomeElectricAfter %></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray"></td>
+                </tr>
+                <tr>
+                    <td class="textcoloryellow">Car (<%=this.pMiles %> miles per day)</td>
+                    <td><%=this.pCarBefore %> Gas</td>
+                    <td><%=this.pCarAfter %></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><%=this.pOilChangeBefore %> Oil Change</td>
+                    <td><%=this.pOilChangeAfter %></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray"></td>
+                </tr>
+                <tr>
+                    <td class="textcoloryellow">ITC Solar Tax Benefit (30%)</td>
+                    <td>$0</td>
+                    <td><%=this.pITCSolarAfter %> Solar IRS Tax Credit on Solar</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray"></td>
+                </tr>
+                <tr>
+                    <td class="textcoloryellow">Business Depreciation</td>
+                    <td><%=this.pBussinessBefore %></td>
+                    <td><%=this.pBussinessAfter %></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray"></td>
+                </tr>
+                <tr>
+                    <td class="textcoloryellow">Local Incentive</td>
+                    <td><%=this.pLocalIncentiveBefore %></td>
+                    <td><%=this.pLocalIncentiveAfter %></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray"></td>
+                </tr>
+                <tr>
+                    <td class="textcoloryellow">EV Tax Benefit</td>
+                    <td>$0</td>
+                    <td>
+                        <%=this.pEVTaxAfter %> IRS Tax Credit on EV
+                        <br />
+                        $2500 CA State Tax Rebate (Cash)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="border-bottom: 1px solid gray"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div>
+        <table style="margin: 0 auto;">
+            <tr>
+                <td style="border-right: 1px solid gray; padding-right: 50px;">
+                    <h3>Chart</h3>
+                    <p class="textbold">CASH BASED-CASH FLOW OVER TIME</p>
+                    <span id="spnChart"></span>
+
+                    <canvas id="densityChart" width="200" height="150"></canvas>
+                    <img id="url" src="<%=this.Image %>" />                    
+                </td>
+                <td style="padding-left: 30px;">
+                    <p class="textbold">A FINANCIAL DECISION MADE</p>
+                    <table>
+                        <tr>
+                            <td>System Cost</td>
+                            <td><%=this.pSystemCost %></td>
+                        </tr>
+                        <tr>
+                            <td>ITC Tax Incentives </td>
+                            <td>-<%=this.pTaxIncentivesPercent %></td>
+                        </tr>
+                        <tr>
+                            <td>Local Incentive</td>
+                            <td>-<%=this.pLocalIncentive %></td>
+                        </tr>
+                    </table>
+                    <p class="linedraw"></p>
+                    <table>
+                        <tr class="textbold">
+                            <td>Cost To You</td>
+                            <td class="paddingleft30 textcoloryellow"><%=this.pCostToYou %></td>
+                        </tr>
+                        <tr>
+                            <td>Payback Period</td>
+                            <td class="paddingleft30"><%=this.pPaybackPeriod %> years</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div style="page-break-before: always;">
+        <table style="width: 100%;">
+            <tr>
+                <td colspan="1">
+                    <img src="Images/HE_Quote/logo1.png" style="height: 150px;" />
+                </td>
+                <td class="frameblackcenter" style="font-size: 22pt; background-color: #333131;">
+                    <strong>APPENDIX</strong><br />
+                    <span style="font-size: 20pt;">FAQS</span>
+                </td>
+            </tr>
+        </table>
+        <br />
+        <div class="margincenter">
+            <p class="textcolorblue">1. What are the financial benefits of solar energy?</p>
+            <p>
+                When you install a solar energy system on your property, you save money on your electricity
+                bills and protect yourself against rising electricity rates in the future. How much you can save
+                depends on the utility rates and solar policies in your area, but going solar is a smart investment
+                regardless of where you live
+            </p>
+            <p class="textcolorblue">2. What is net metering?</p>
+            <p>
+                Net metering is the system that utilities use to credit solar energy system owners for the
+                electricity produced by their solar panels. With net metering, you only pay for the electricity that
+                you use beyond what your solar panels can generate. Net metering policies differ from state to
+                state – from Massachusetts to California to Hawaii – so make sure to do your homework ahead
+                of time.
+            </p>
+            <p class="textcolorblue">3. How do solar photovoltaic (PV) panels work?</p>
+            <p>
+                Solar panels absorb the sun's energy throughout the day and convert it into direct current (DC)
+                electricity. Most homes and businesses run on alternating current (AC) electricity, so the DC
+                electricity is then passed through an inverter to convert it to usable AC electricity. At that point,
+                you either use the electricity in your house or send it back to the electric grid
+            </p>
+            <p class="textcolorblue">4. What happens if there is snow on solar panels?</p>
+            <p>
+                Solar panels convert sunshine into power, so if your panels are covered in snow they can t
+                produce electricity. Snow generally isn t heavy enough to cause structural issues with your
+                panels, and since most panels are tilted at an angle the snow will slide off. If snow does
+                accumulate, your panels are easy to clean.
+            </p>
+            <p class="textcolorblue">5. Will I still receive an electric bill if I have solar panels?</p>
+            <p>
+                Unless your solar energy system includes battery storage and you are fully off the grid, you will
+                still receive a bill from your utility. However, you can dramatically reduce your bill, or even cut
+                the amount you owe to $0, with a solar panel system that matches your energy use.
+            </p>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div style="page-break-before: always;">
+        <table style="width: 100%;">
+            <tr style:>
+                <td colspan="1">
+                    <img src="Images/HE_Quote/logo1.png" style="height: 150px;" />
+                </td>
+                <td class="frameblackcenter" style="font-size: 22pt; background-color: #333131;">
+                    <strong>APPENDIX</strong><br />
+                    <span style="font-size: 20pt">OTHER SERVICES</span>
+                </td>
+            </tr>
+        </table>
+        <div class="margincenter">
+            <div class="textbold" style="width: 100%; background: #9c9a9a; margin: auto; height: 40px">
+                <p class="center" style="padding-top: 8px;">POWER MONITORING & USAGE OPTIMIZATION</p>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <p class="textbold">POWER MONITORING & USAGE OPTIMIZATION</p>
+                        </td>
+                        <td style="width: 45%; text-align: right; padding-top: 10px;" rowspan="2">
+                            <img src="Images/HE_Quote/smartIoT.png" style="width: 100%;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 20px 0;">
+                            <p>
+                                We offer free Power Usage Analysis before suggesting any
+                                Energy solution for your home/building. Our proprietary
+                                IoT power monitoring system enables us to analyze your
+                                electricity consumption in real-time. This analysis allows
+                                us to offer the best solution that saves you the most
+                                money.
+                            </p>
+                            <p>
+                                Your consumption and solar production data is available at
+                                your finger Tips via Android and IOS Phone App.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="textbold" style="width: 100%; background: #9c9a9a; margin: auto; height: 40px;">
+                <p class="center" style="padding-top: 8px;">SOLAR & BATTERY</p>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <p class="textbold">SOLAR & BATTERY</p>
+                        </td>
+                        <td style="width: 45%; text-align: right; padding-top: 10px;" rowspan="2">
+                            <img src="Images/HE_Quote/battery.png" style="width: 100%;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                We provide a turned-key solar system to you that includes
+                                consulting, design, obtaining permit and installation.
+                            </p>
+                            <p>
+                                We customize and use the best-fit materials for your
+                                projects that will maximize your ROI to meet all of your
+                                objectives.
+                            </p>
+
+                            <p>
+                                Our solar solutions has battery integrated option that
+                                allows us to address issues such as demand charge rates
+                                and power backup.
+                            </p>
+
+                            <p>
+                                With the experience of many residential and commercial
+                                projects, we are 100% confident that we will exceed your
+                                expectations by completing your project on time and
+                                within budget, GUANRANTEED!
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="textbold" style="width: 100%; background: #9c9a9a; margin: auto; height: 40px;">
+                <p class="center" style="padding-top: 8px;">LED LIGHTING</p>
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <p class="textbold">LED LIGHTING</p>
+                        </td>
+                        <td style="width: 45%; text-align: right; padding-top: 10px;" rowspan="2">
+                            <img src="Images/HE_Quote/LedLighting.png" style="width: 100%;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Upgrading to LED Lighting is a smart and quick way to
+                            improve energy-use efficiency. It instantly lowers your
+                            electricity bill without major capital investment. Another
+                            benefit from LED lighting is the savings you get from
+                            maintenance!
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <p class="center">Find out more at <i><a target="_blank" href="https://www.honestenergy.com">www.honestenergy.com</a></i></p>
+        </div>        
+    </div>    
+    <script src="Js/Chart_img.js"></script>
+</body>
+</html>
