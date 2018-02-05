@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using CreatedFile.Common;
 
 namespace ROIDealer.Common
 {
@@ -73,9 +74,9 @@ namespace ROIDealer.Common
                 if (date != null)
                 {
                     col.Style.Numberformat.Format = format;
-                }              
+                }
                 col.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-            }            
+            }
         }
 
         public static void FormatExcelHeader(ExcelWorksheet ws, int iRow, int iColumn, object value, ExcelAlignment align)
