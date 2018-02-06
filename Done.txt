@@ -16,8 +16,6 @@ Trang về tài chính, cung cấp dịch vụ tài chính,
 
 Project Data Warehouse backend
 https://picofinancial.com/datawarehouse/	
-admin
-premier
 Page quản lý kho, tính toán số lượng khách hàng theo thời gian, và điều kiện đi kèm( theo tiểu bang, theo số tiền nợ.)
 Sử dụng Source Vault  là Source Control để quản lý code. 																
 

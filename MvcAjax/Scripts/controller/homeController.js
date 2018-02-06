@@ -14,7 +14,7 @@ var homeController = {
             rules: {
                 txtName: {
                     required: true,
-                    minlength: 3,
+                     minlength: 3,
                 },
                 txtSalaryEdit: {
                     required: true,
@@ -57,7 +57,7 @@ var homeController = {
         $('#btnSave').off('click').on('click', function () {
             if ($("#frmSaveData").valid()) {
                 homeController.saveData();
-            }
+            }            
         });
 
         $('.btn-edit').off('click').on('click', function () {
@@ -68,7 +68,7 @@ var homeController = {
 
         $('.btn-delete').off('click').on('click', function () {
             var id = $(this).data('id');
-            bootbox.confirm("Are you sure delete this?", function (result) {
+            bootbox.confirm("Are you sure delete this?", function (result) {                
                 homeController.deleteEmployee(id);
             });
         });
@@ -83,7 +83,7 @@ var homeController = {
             homeController.loadData(true);
         });
     },
-    deleteEmployee: function (id) {
+    deleteEmployee: function(id){
         $.ajax({
             url: '/Home/Delete',
             data: {
@@ -92,11 +92,11 @@ var homeController = {
             type: 'POST',
             dataType: 'json',
             success: function (response) {
-                if (response.status === true) {
+                if (response.status == true) {
                     bootbox.alert("Delete Success", function () {
                         $("#modalAddUpdate").modal('hide');
                         homeController.loadData(true);
-                    });
+                    });                    
                 }
                 else {
                     bootbox.alert(response.Message);
@@ -116,7 +116,7 @@ var homeController = {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                if (response.status === true) {
+                if (response.status == true) {
                     var data = response.data;
                     $('#hidD').val(data.ID);
                     $('#txtName').val(data.Name);
@@ -152,12 +152,12 @@ var homeController = {
             type: 'POST',
             dataType: 'json',
             success: function (response) {
-                if (response.status === true) {
+                if (response.status == true) {
                     bootbox.alert("Save Success", function () {
                         $("#modalAddUpdate").modal('hide');
                         homeController.loadData(true);
                     })
-
+                    
                 }
                 else {
                     bootbox.alert(response.Message);
@@ -219,7 +219,7 @@ var homeController = {
             url: '/Home/Update',
             type: 'POST',
             dataType: 'json',
-            data: { model: JSON.stringify(data) },
+            data: { model: JSON.stringify(data)},
             success: function (response) {
                 if (response.status) {
                     bootbox.alert('Update success');
@@ -287,7 +287,8 @@ var homeController = {
     },
     paging: function (totalRow, callback, changePageSize) {
 
-        if ($('#pagination a').length === 0 || changePageSize === true) {
+        if ($('#pagination a').length === 0 || changePageSize === true)
+        {
             $('#pagination').empty();
             $('#pagination').removeData('twbs-pagination');
             $('#pagination').unbind('page');
