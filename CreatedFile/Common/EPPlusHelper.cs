@@ -12,7 +12,7 @@ namespace ROIDealer.Common
     {
         public static void FormatExcelNumber(ExcelWorksheet ws, int iRow, int iColumn, object value)
         {
-            ws.Cells[iRow, iColumn].Value = HtmlHelper.ConvertObjectToInt(value, 0);
+            ws.Cells[iRow, iColumn].Value = Functions.ConvertObjectToInt(value, 0);
             using (ExcelRange col = ws.Cells[iRow, iColumn])
             {
                 col.Style.Numberformat.Format = "#,##0";
@@ -22,7 +22,7 @@ namespace ROIDealer.Common
 
         public static void FormatExcelDecimal(ExcelWorksheet ws, int iRow, int iColumn, object value)
         {
-            ws.Cells[iRow, iColumn].Value = HtmlHelper.ConvertObjectToDecimal(value, 0);
+            ws.Cells[iRow, iColumn].Value = Functions.ConvertObjectToDecimal(value, 0);
             using (ExcelRange col = ws.Cells[iRow, iColumn])
             {
                 col.Style.Numberformat.Format = "#,##0.00";
@@ -32,7 +32,7 @@ namespace ROIDealer.Common
 
         public static void FormatExcelMoney(ExcelWorksheet ws, int iRow, int iColumn, object value)
         {
-            ws.Cells[iRow, iColumn].Value = HtmlHelper.ConvertObjectToDecimal(value, 0);
+            ws.Cells[iRow, iColumn].Value = Functions.ConvertObjectToDecimal(value, 0);
             using (ExcelRange col = ws.Cells[iRow, iColumn])
             {
                 col.Style.Numberformat.Format = "$#,##0.00";
@@ -42,7 +42,7 @@ namespace ROIDealer.Common
 
         public static void FormatExcelPercent(ExcelWorksheet ws, int iRow, int iColumn, object value)
         {
-            ws.Cells[iRow, iColumn].Value = HtmlHelper.ConvertObjectToDecimal(value, 0);
+            ws.Cells[iRow, iColumn].Value = Functions.ConvertObjectToDecimal(value, 0);
             using (ExcelRange col = ws.Cells[iRow, iColumn])
             {
                 col.Style.Numberformat.Format = "#,##0%";
@@ -52,7 +52,7 @@ namespace ROIDealer.Common
 
         public static void FormatExcelPercent2(ExcelWorksheet ws, int iRow, int iColumn, object value)
         {
-            ws.Cells[iRow, iColumn].Value = HtmlHelper.ConvertObjectToDecimal(value, 0);
+            ws.Cells[iRow, iColumn].Value = Functions.ConvertObjectToDecimal(value, 0);
             using (ExcelRange col = ws.Cells[iRow, iColumn])
             {
                 col.Style.Numberformat.Format = "#,###.#0%";
@@ -67,7 +67,7 @@ namespace ROIDealer.Common
 
         public static void FormatExcelDate(ExcelWorksheet ws, int iRow, int iColumn, object value, string format)
         {
-            var date = HtmlHelper.ConvertToDate(value);
+            var date = Functions.ConvertToDate(value);
             ws.Cells[iRow, iColumn].Value = date;
             using (ExcelRange col = ws.Cells[iRow, iColumn])
             {
@@ -155,11 +155,6 @@ namespace ROIDealer.Common
                         break;
                 }
             }
-        }
-
-        public static void FormatExcelDataType(ExcelWorksheet ws, int iRow, int iColumn, DataType type)
-        {
-
         }
 
         public static void FormatExcel(ExcelWorksheet ws, int iRow, int iColumn, object value, string format, ExcelAlignment align,
