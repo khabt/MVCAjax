@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+    <!--<script src="Scripts/jquery-1.10.2.min.js"></script>-->
+    <script>
+        window.jQuery || document.write('<script src="Scripts\/jquery-1.10.2.min.js"><\/script>');
+    </script>
+    <script>
+        //jQuery(document).ready(function () {
+        //    jQuery('#btn1').click(function () {
+        //        alert('ok');
+        //    });
+        //});
+
+        //window.onload = function () {
+        //    var btn = document.getElementById('btn1');
+        //    btn.addEventListener('click', clickHere);
+        //}
+
+        //function clickHere() {
+        //    alert('ok js');
+        //}
+        //$(document).ready(function () {
+        //    alert('Document Object Model loaded');
+        //});
+
+        //$(window).load(function () {
+        //    alert('Window loaded');
+        //})
+        //$(document).ready(function () {
+        //    $('#div1').html('Width: ' + $('#image1').width() + ' Heigth: ' + $('#image1').height());
+        //});
+
+        //$(window).load(function () {
+        //    $('#div1').html('Width: ' + $('#image1').width() + ' Heigth: ' + $('#image1').height());
+        //});
+
+        //$(document).ready(function () {
+        //    var button = $('#button1');
+        //    //button.click(function () {
+        //    //    button.css('background-color', 'yellow');
+        //    //})
+        //    if (button.length > 0) {
+        //        alert('element found');
+        //    }
+        //    else alert('element not found');
+        //})
+        $(document).ready(function () {
+            //$('#table1 tr:even').css('background-color', 'green');
+            //$('#table1 tr:odd').css('background-color', 'grey');
+            //$('#table1 tr td:even').css('background-color', 'green');
+            //$('#table1 tr td:odd').css('background-color', 'grey');
+            //$('table tr td:even').css('background-color', 'green');
+            //$('table tr td:odd').css('background-color', 'grey');
+            $('#table1 tr:first').each(function () {
+                //if ($(this).find('td:first').text() == 'DI')
+                alert($(this).html());
+            })
+        })
+    </script>
+</head>
+<body>
+    <!--<button id="btn1">Click</button>-->
+    <!--<div id="div1"></div>
+    <img id="image1" src="Images/lion-4k-wallpaper.jpg" />-->
+    <!--<button id="button1">Click</button>-->
+    <table id="table1" border="1">
+        <tr>
+            <td>ASP.NET</td>
+            <td>PHP</td>
+            <td>Java</td>
+        </tr>
+        <tr>
+            <td>SQL Server</td>
+            <td>Oracle</td>
+            <td>MySQL</td>
+        </tr>
+        <tr>
+            <td>DI</td>
+            <td>MVC</td>
+            <td>MMV</td>
+        </tr>
+    </table>
+    <br />
+    <table id="table2" border="1">
+        <tr>
+            <td>ASP.NET</td>
+            <td>PHP</td>
+            <td>Java</td>
+        </tr>
+        <tr>
+            <td>SQL Server</td>
+            <td>Oracle</td>
+            <td>MySQL</td>
+        </tr>
+        <tr>
+            <td>DI</td>
+            <td>MVC</td>
+            <td>MMV</td>
+        </tr>
+    </table>
+
+    <div>
+        <a href="https://google.com">google.com</a>
+    </div>
+</body>
+</html>

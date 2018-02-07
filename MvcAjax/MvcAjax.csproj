@@ -208,6 +208,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="class-name.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -235,6 +236,8 @@
     <Content Include="Html\Proposal.html" />
     <Content Include="Html\Proposal_Js.html" />
     <Content Include="Html\Study_Jquery.html" />
+    <Content Include="Images\lion-4k-wallpaper.jpg" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">

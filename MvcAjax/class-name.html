@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$('span.small').css('border', '1px solid grey');
+            //$('.big').find('.small').css('border', '1px solid grey');
+            $('.big').filter('.small').css('border', '1px solid grey');
+        })
+    </script>
+</head>
+<body>
+
+    <div class="big">
+        <span class="small">This is class seletor</span>
+    </div>
+
+    <div class="big small">
+        <span class="small">This is class selector 1</span>
+    </div>
+
+    <div class="small">
+        <span>This is class selector 2</span>
+    </div>
+</body>
+</html>
