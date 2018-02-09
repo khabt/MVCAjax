@@ -17,6 +17,7 @@ using System.Web.Mail;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
+using WebSupergoo.ABCpdf9;
 
 namespace CreatedFile.Common
 {
@@ -403,6 +404,21 @@ namespace CreatedFile.Common
             try
             {
                 CreateFileExcel(pathFile, fileName, dSet, true);
+            }
+            catch (Exception ex)
+            {
+
+                WriteLog("CreateFileExcel - Msg: " + ex.Message);
+            }
+        }
+
+        public static void CreateFileExcel(string fullPath, DataSet dSet)
+        {
+            string pathFile = Path.GetDirectoryName(fullPath);
+            string fileName = Path.GetFileName(fullPath);
+            try
+            {
+                CreateFileExcel(pathFile, fileName, dSet, false);
             }
             catch (Exception ex)
             {
@@ -1154,5 +1170,118 @@ namespace CreatedFile.Common
             Functions.DownLoadFile(Response, filename, false);
         }
         #endregion
+
+        public static string ConvertHtmlToPDF(string filePathHTML)
+        {
+            WriteLog("[ConvertHmlToPDF_CreateFile]: ----------Begin----------");
+            WriteLog("[ConvertHmlToPDF_CreateFile] filePathHTML: " + filePathHTML);
+            string result = string.Empty;
+            bool rsCheck = XSettings.InstallLicense("X/VKS08wmMtAun4hGNvFONzmS/QQY7hZ9Z2488LHIg8X5nu5Qx7dYsZhez00hWZRXd5Xim0uoXp3ifxwDtAusQ0lPTnPXR1401Y=");
+
+            if (!rsCheck)
+            {
+                result = "Invalid Websupergoo license.";
+                WriteLog("[ConvertHmlToPDF_CreateFile] result:  " + result);
+                return null;
+            }
+            string FilesDir = Functions.GetAppConfigByKey("FileDir");
+
+            if (!System.IO.File.Exists(FilesDir))
+            {
+                System.IO.Directory.CreateDirectory(FilesDir);
+            }
+
+            string fileName = "File_Convert_PDF" + DateTime.Now.Ticks.ToString() + ".pdf";
+
+            string fullPath = Path.Combine(FilesDir, fileName);
+
+            WriteLog("[ConvertHmlToPDF_CreateFile] FilesDir: " + FilesDir);
+            WriteLog("[ConvertHmlToPDF_CreateFile] fileName: " + fileName);
+            WriteLog("[ConvertHmlToPDF_CreateFile] fullPath: " + fullPath);
+
+            #region Create PDF
+            try
+            {
+                Doc pages = new Doc();
+                try
+                {
+                    Doc doc = new Doc();
+                    //doc.Rect.Inset(30, 10);
+                    //doc.HtmlOptions.Engine = EngineType.MSHtml;
+                    //doc.HtmlOptions.Engine = EngineType.Chrome;
+
+                    doc.HtmlOptions.FontEmbed = true;
+                    doc.HtmlOptions.FontSubstitute = false;
+                    doc.HtmlOptions.FontProtection = false;
+                    doc.HtmlOptions.BrowserWidth = 1200;
+
+                    doc.HtmlOptions.PageCacheClear();
+                    doc.HtmlOptions.UseScript = true;
+                    //doc.HtmlOptions.OnLoadScript = "(function(){window.ABCpdf_go = false; setTimeout(function(){window.ABCpdf_go = true;}, 3000);})();";
+
+                    // Render after 3 seconds
+                    //doc.HtmlOptions.OnLoadScript = " (function(){"
+                    //  + " window.external.ABCpdf_RenderWait();"
+                    //  + " setTimeout(function(){ "
+                    //  + " window.external.ABCpdf_RenderComplete(); }, 10000);"
+                    //  + "})();";
+                    //doc.SetInfo(0, "RenderDelay", "45000");
+                    //doc.SetInfo(0, "OneStageRender", 0);
+
+                    //Render after 3 seconds
+                    //doc.HtmlOptions.OnLoadScript = "(function(){"
+                    //  + " window.ABCpdf_go = false;"
+                    //  + " setTimeout(function(){ window.ABCpdf_go = true; }, 10000);"
+                    //  + "})();";
+
+                    doc.Page = doc.AddPage();
+                    int theID;
+
+                    theID = doc.AddImageUrl(filePathHTML);
+
+                    while (true)
+                    {
+                        doc.FrameRect(); // add a black border
+                        if (!doc.Chainable(theID))
+                            break;
+                        doc.Page = doc.AddPage();
+                        theID = doc.AddImageToChain(theID);
+
+                        System.Threading.Thread.Sleep(500);
+                    }
+
+                    //doc.Rect.String = "100 50 500 150";                    
+
+                    //for (int i = 1; i <= doc.PageCount; i++)
+                    //{
+                    //    doc.PageNumber = i;
+                    //    doc.AddText("Page " + i.ToString());
+                    //    //doc.FrameRect();
+                    //}
+
+                    pages.Append(doc);
+                }
+                catch (Exception ex2)
+                {
+                    result = ex2.Message;
+                    WriteLog("[ConvertHmlToPDF_CreateFile] - Exception: " + result);
+                    return null;
+                }
+
+                pages.Save(fullPath);
+                pages.Clear();
+                result = fullPath;
+
+                WriteLog("[ConvertHmlToPDF_CreateFile]: ----------End----------");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                result = ex.Message;
+                WriteLog("[ConvertHmlToPDF_CreateFile] -- Exception: " + result);
+                return null;
+            }
+            #endregion
+        }
     }
 }

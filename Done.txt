@@ -7,6 +7,8 @@ Làm tròn 8 số
 Math.Round(ConvertToDecimal(var), 8)
 Math.Round(ConvertToDecimal(Eval("NoOfLead"))/ConvertToDecimal(Eval("WorkingTime")), 8)
 
+<add name="AbcPdfLicense" connectionString="X/VKS0cMn8tAun4hGNvFONyWaelyItt2pqrH5srEKm4brmiSKC69N5FsGmRijGFheK9mhXoi/HVdi/VrNv0Vv1RyfQWQCg=="/>
+
 Thêm bôi đen khi tạo page mới, menuData3, TemplateLogon, TemplateSummary trong premier
 
 Project Premier
@@ -1565,5 +1567,9 @@ format number
 
 $(':input[type="submit"]').prop('disabled', false);
 
-http://192.168.100.31/convert2pdf//api/ConvertHtml2Pdf?url=\\192.168.100.31\e\HE_Solar\Html\Proposal.html&fileName=wwwww
-http://crm.roipredictions.com/(S(zrwmk1c2d4umtt2qhgbnri1h))/Proposal.aspx?isn=7
+Tìm hiểu callback, generic, delegate, razor,
+thuật ngữ trong mvc, 
+token, cookie,
+SET QUOTED_IDENTIFIER ON,
+SCOPE_IDENTITY(),
+declare

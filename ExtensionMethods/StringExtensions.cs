@@ -18,5 +18,12 @@ namespace ExtensionMethods
         {
             return input != null && input.Length >= minSize;
         }
+
+        public static T randomElement<T>(this List<T> list)
+        {
+            Random random = new Random();
+            int randomIndex = random.Next(list.Count - 1);
+            return list[randomIndex];
+        }
     }
 }

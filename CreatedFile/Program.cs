@@ -13,6 +13,7 @@ namespace CreatedFile
     {
         static void Main(string[] args)
         {
+            string fileDir = Functions.ConvertHtmlToPDF("https://mail.google.com/mail/u/0/#inbox");
             DataSet dSet1 = new DataSet();
             dSet1 = Functions.GetDataFromExcel("D:\\equal\\memfixzip.xlsx");
             string fname = "PLQ 0202 BW SNAP215K49K_60_26290";
@@ -149,9 +150,9 @@ namespace CreatedFile
             db.Tables.Add(tb2);
             db.AcceptChanges();
             string filePath = string.Format("D:\\equal\\result of {0}", fname);
-            Functions.DownloadFileExcel(filePath, filePath, db, false);
+            // Functions.CreateFileExcel(filePath, db);
 
-            Functions.CreateFileCSV(tb2, filePath + ".csv");
+            //Functions.CreateFileCSV(tb2, filePath + ".csv");
         }
     }
 }
