@@ -1573,3 +1573,5 @@ token, cookie,
 SET QUOTED_IDENTIFIER ON,
 SCOPE_IDENTITY(),
 declare
+join left, join right,
+question sql, mvc, asp.net

@@ -1,5 +1,5 @@
 ﻿var homeConfig = {
-    pageSize: 12,
+    pageSize: 10,
     pageIndex: 1,
 }
 
@@ -14,7 +14,7 @@ var homeController = {
             rules: {
                 txtName: {
                     required: true,
-                     minlength: 3,
+                    minlength: 3,
                 },
                 txtSalaryEdit: {
                     required: true,
@@ -49,6 +49,7 @@ var homeController = {
         //        homeController.updateName(id, value, "KAAAAAA");
         //    }
         //})
+
         $("#btnAddNew").off('click').on('click', function () {
             $("#modalAddUpdate").modal('show');
             homeController.resetForm();
@@ -57,19 +58,20 @@ var homeController = {
         $('#btnSave').off('click').on('click', function () {
             if ($("#frmSaveData").valid()) {
                 homeController.saveData();
-            }            
+            }
         });
 
         $('.btn-edit').off('click').on('click', function () {
             $("#modalAddUpdate").modal('show');
+            $(".modal-title").text('Edit');
             var id = $(this).data('id');
             homeController.loadDetail(id);
         });
 
         $('.btn-delete').off('click').on('click', function () {
             var id = $(this).data('id');
-            bootbox.confirm("Are you sure delete this?", function (result) {                
-                homeController.deleteEmployee(id);
+            bootbox.confirm("Are you sure delete this?", function (result) {
+                if (result) homeController.deleteEmployee(id);
             });
         });
 
@@ -83,7 +85,7 @@ var homeController = {
             homeController.loadData(true);
         });
     },
-    deleteEmployee: function(id){
+    deleteEmployee: function (id) {
         $.ajax({
             url: '/Home/Delete',
             data: {
@@ -92,11 +94,11 @@ var homeController = {
             type: 'POST',
             dataType: 'json',
             success: function (response) {
-                if (response.status == true) {
+                if (response.status === true) {
                     bootbox.alert("Delete Success", function () {
                         $("#modalAddUpdate").modal('hide');
                         homeController.loadData(true);
-                    });                    
+                    });
                 }
                 else {
                     bootbox.alert(response.Message);
@@ -116,7 +118,7 @@ var homeController = {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
-                if (response.status == true) {
+                if (response.status === true) {
                     var data = response.data;
                     $('#hidD').val(data.ID);
                     $('#txtName').val(data.Name);
@@ -152,12 +154,12 @@ var homeController = {
             type: 'POST',
             dataType: 'json',
             success: function (response) {
-                if (response.status == true) {
+                if (response.status === true) {
                     bootbox.alert("Save Success", function () {
                         $("#modalAddUpdate").modal('hide');
                         homeController.loadData(true);
                     })
-                    
+
                 }
                 else {
                     bootbox.alert(response.Message);
@@ -219,7 +221,9 @@ var homeController = {
             url: '/Home/Update',
             type: 'POST',
             dataType: 'json',
-            data: { model: JSON.stringify(data)},
+            data: {
+                model: JSON.stringify(data)
+            },
             success: function (response) {
                 if (response.status) {
                     bootbox.alert('Update success');
@@ -276,19 +280,22 @@ var homeController = {
             url: '/Home/UpdateName',
             type: 'POST',
             dataType: 'json',
-            data: { model: JSON.stringify(data) },
+            data: {
+                model: JSON.stringify(data)
+            },
             success: function (response) {
                 if (response.status) {
                     alert('Update successed');
                 }
-                else { alert('Update failed'); }
+                else {
+                    alert('Update failed');
+                }
             }
         })
     },
     paging: function (totalRow, callback, changePageSize) {
 
-        if ($('#pagination a').length === 0 || changePageSize === true)
-        {
+        if ($('#pagination a').length === 0 || changePageSize === true) {
             $('#pagination').empty();
             $('#pagination').removeData('twbs-pagination');
             $('#pagination').unbind('page');
@@ -297,7 +304,7 @@ var homeController = {
         var totalPage = Math.ceil(totalRow / homeConfig.pageSize)
         $('#pagination').twbsPagination({
             totalPages: totalPage,
-            visiblePages: 10,
+            visiblePages: 20,
             first: "Đầu",
             prev: "Trước",
             next: "Tiếp",

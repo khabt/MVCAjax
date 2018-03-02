@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnSubmit").on('click', function () {
+                var selected = $('#ddlSkills option:selected');
+                if (selected.length > 0) {
+                    var result = '';
+                    selected.each(function () {
+                        result += 'Value: ' + $(this).val() + ". Text: " + $(this).text() + '<br>';
+                    });
+
+                    $("#divResult").html(result);
+                }
+                else $("#divResult").html('No selected');
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <select id="ddlSkills" multiple>
+        <option>Choose language</option>
+        <option value="C#">C#</option>
+        <option value="PHP">PHP</option>
+        <option value="Java">Java</option>
+        <option value="F#">F#</option>
+    </select>
+    <br />
+    <button id="btnSubmit">Submit</button>
+    <br />
+    <div id="divResult">
+
+    </div>
+</body>
+</html>

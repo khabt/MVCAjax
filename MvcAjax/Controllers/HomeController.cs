@@ -120,19 +120,20 @@ namespace MvcAjax.Controllers
             //int totalRow = ListEmp.Count;
             IQueryable<Employees> model = _context.Employees;
 
-            if (!string.IsNullOrEmpty(name)) {
+            if (!string.IsNullOrEmpty(name))
+            {
                 model = model.Where(x => x.Name.Contains(name));
             }
-            if (!string.IsNullOrEmpty(status)) {
+            if (!string.IsNullOrEmpty(status))
+            {
                 var statusBool = bool.Parse(status);
                 model = model.Where(x => x.Status == statusBool);
             }
             int totalRow = model.Count();
 
-            model = model.OrderByDescending(x =>x.ID).
+            model = model.OrderByDescending(x => x.ID).
                 Skip((page - 1) * pageSize)
                 .Take(pageSize);
-            
 
             return Json(new
             {
@@ -239,7 +240,7 @@ namespace MvcAjax.Controllers
 
             return Json(new
             {
-                data = model,                
+                data = model,
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
@@ -256,7 +257,7 @@ namespace MvcAjax.Controllers
             {
                 _context.SaveChanges();
                 return Json(new
-                {                    
+                {
                     status = true
                 });
             }
@@ -268,7 +269,7 @@ namespace MvcAjax.Controllers
                     message = ex.Message
                 });
             }
-            
+
         }
     }
 }

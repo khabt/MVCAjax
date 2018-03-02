@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btn1').click(function () {
+                $('#lbl1').text("Get text");
+            });
+
+            $('#btn2').click(function () {
+                $('#lbl1').css('background-color', 'blue');
+            });
+
+            $('#btn3').click(function () {
+                $('#lbl1').attr('style', 'background-color:red');
+                alert($("#div1").text());
+                alert($("#div1").html());
+            });
+
+            $('#btn4').click(function () {
+                $('#spanProp').text($('#chk1').prop('checked'));
+                $('#spanAttr').text($('#chk1').attr('checked'));
+                //$('#chk1').prop('checked', true);
+                var check = $('#chk1').prop('checked');
+                if (check) $('#chk1').prop('checked', false);
+                else $('#chk1').prop('checked', true);
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <input type="checkbox" id="chk1" checked="checked" />
+    <label id="lbl1"></label>
+    <br />
+    <label id="lbl2"></label>
+    <br />
+    <button id="btn1">Click1</button>
+    <button id="btn2">Click2</button>
+    <button id="btn3">Click3</button>
+    <br />
+    <div id="div1">
+        <span id="spanProp">qwerty</span>
+        <span id="spanAttr">abcnm</span>
+    </div>
+    <br />
+    <button id="btn4">Click4</button>
+</body>
+</html>

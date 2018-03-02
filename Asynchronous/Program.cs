@@ -14,6 +14,7 @@ namespace Asynchronous
             Manipulate mani = new Manipulate();
             Task<int> result = mani.AccessTheWebAsync();
             Console.WriteLine(result.Result);
+            //mani.DoIndependenceWork();
 
             Console.ReadKey();
         }

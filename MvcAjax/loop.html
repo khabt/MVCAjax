@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        //$(document).ready(function () {
+        //    //alert($('li').text());
+        //    var result = '';
+        //    $('li').each(function (index, element) {
+        //        //alert('index: ' + index + '. element: ' + $(element).text());
+        //        if ($(this).text() == 'Vietnam')
+        //            return false;
+        //        $(this).css('color', 'red');
+
+        //    });
+
+        //$(document).ready(function () {
+        //    //alert($('li').text());
+        //    var result = '';
+        //    $('li').each(function (index, element) {
+        //        result += $(this).text() + '<br>';
+        //    });
+        //    $('#result').html(result);
+        //});
+
+        $(document).ready(function () {
+            $("li").css('color', 'red')
+                .slideUp(1000)
+                .slideDown(1000)
+                .attr('title', 'ok');
+        });
+    </script>
+</head>
+<body>
+    <ul>
+        <li>US</li>
+        <li>England</li>
+        <li>China</li>
+        <li>Russia</li>
+        <li>Thailand</li>
+        <li>Vietnam</li>
+    </ul>
+    <div id="result"></div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .color {
+            color: blue;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <script src="script/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnAddClass').on('click', function () {
+                $('h1').addClass('color');
+            });
+
+            $('#btnRemoveClass').on('click', function () {
+                $('h1').removeClass('color');
+            });
+
+            $('#btnToggleClass').on('click', function () {
+                $('h1').toggleClass('color');
+            });
+
+            $('#btnAddItalic').on('click', function () {
+                $('h1').addClass('italic');
+            });
+
+            $('#btnRemoveItalic').on('click', function () {
+                $('h1').removeClass('italic');
+            });
+
+            $('#btnHasItalic').on('click', function () {
+                alert($('h1').hasClass('color italic'));
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>This is class manipulate</h1>
+    <br />
+    <button id="btnAddClass">Add color</button>
+    <button id="btnRemoveClass">Remove color</button>
+    <button id="btnToggleClass">Toggle color</button>
+    <br />
+    <button id="btnAddItalic">Add italic</button>
+    <button id="btnRemoveItalic">Remove italic</button>
+    <button id="btnHasItalic">Has italic</button>
+</body>
+</html>

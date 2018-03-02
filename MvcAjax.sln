@@ -20,6 +20,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Experience", "Experience", "{6345A0AE-7D8B-4238-BD22-23BB7A5ED8D1}"
 	ProjectSection(SolutionItems) = preProject
 		Done.txt = Done.txt
+		ExamCreateTable.sql = ExamCreateTable.sql
+		ExamProcedure.sql = ExamProcedure.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collection", "Collection\Collection.csproj", "{E5D1A7F8-9C68-4664-BA91-483532B6865A}"
@@ -43,6 +45,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionMethods", "ExtensionMethods\ExtensionMethods.csproj", "{63EE7E48-D0FD-47B8-8002-6AF499EA6DB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asynchronous", "Asynchronous\Asynchronous.csproj", "{1E6E9627-8B0C-4D7D-9573-EA7C7CAC32E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonDemo", "JsonDemo\JsonDemo.csproj", "{496AA013-B88F-40CA-B711-B3DA76B69950}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -122,6 +126,10 @@ Global
 		{1E6E9627-8B0C-4D7D-9573-EA7C7CAC32E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E6E9627-8B0C-4D7D-9573-EA7C7CAC32E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E6E9627-8B0C-4D7D-9573-EA7C7CAC32E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496AA013-B88F-40CA-B711-B3DA76B69950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496AA013-B88F-40CA-B711-B3DA76B69950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496AA013-B88F-40CA-B711-B3DA76B69950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496AA013-B88F-40CA-B711-B3DA76B69950}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

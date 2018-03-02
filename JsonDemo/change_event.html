@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="script/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var result = '';
+            $('.inputRequired').change(function () {
+
+                var value = $(this).val();
+                if (result == '') {
+                    result = value;
+                }
+                else {
+                    result += ',' + value;
+                }
+                $('#divResult').html(result);
+            });
+        });
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>First Name</td>
+            <td>
+                <input id="txtFirstName" type="text" class="inputRequired" />
+            </td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td>
+                <input id="txtLastName" type="text" class="inputRequired" />
+            </td>
+        </tr>
+        <tr>
+            <td>City</td>
+            <td>
+                <select id="ddlCity" class="inputRequired">
+                    <option value="Select">Select</option>
+                    <option value="New York">New York</option>
+                    <option value="London">London</option>
+                    <option value="Hanoi">Hanoi</option>
+                    <option value="PhnomPhenh">PhnomPhenh</option>
+
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Favorite Color</td>
+            <td>
+                <input id="radioRed" name="color" value="Red" type="radio" class="inputRequired" /> Red
+                <input id="radioGrey" name="color" value="Grey" type="radio" class="inputRequired" /> Grey
+                <input id="radioGreen" name="color" value="Green" type="radio" class="inputRequired" /> Green
+                <input id="radioBlue" name="color" value="Blue" type="radio" class="inputRequired" /> Blue
+            </td>
+        </tr>
+        <tr>
+            <td>Contact Method</td>
+            <td>
+                <input id="chkBoxMail" type="checkbox" value="Email" class="inputRequired" /> Mail
+                <input id="chkBoxPhone" type="checkbox" value="Phone" class="inputRequired" />Phone
+                <input id="chkBoxSMS" type="checkbox" value="SMS" class="inputRequired" />SMS
+            </td>
+
+        </tr>
+        <tr>
+            <td>Comment</td>
+            <td>
+                <textarea id="txtComments" class="inputRequired"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="btnSubmit" type="button" value="Submit" />
+            </td>
+            <td>
+                <div id="divResult"></div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

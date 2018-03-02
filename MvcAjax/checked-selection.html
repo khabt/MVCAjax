@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnSubmit").on('click', function () {
+                var rdoChecked = $('input[type="radio"]:checked');
+                if (rdoChecked.length > 0) $("#divResult").text(rdoChecked.val() + " radio selected");
+                else $("#divResult").text(" no radio selected");
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <label>
+        <input type="radio" name="gender" value="1" />Male
+    </label>
+    <label>
+        <input type="radio" name="gender" value="0" />Female
+    </label>
+    <br />
+    <br />
+    <input type="button" id="btnSubmit" value="Submit" />
+    <br />
+    <div id="divResult">
+
+    </div>
+</body>
+</html>
