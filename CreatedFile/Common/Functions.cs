@@ -1283,5 +1283,35 @@ namespace CreatedFile.Common
             }
             #endregion
         }
+
+        public static string GetValidFileName(string fileName)
+        {
+            // remove any invalid character from the filename.
+            var ret = Regex.Replace(fileName.Trim(), "[^A-Za-z0-9_. ]+", string.Empty);
+            return ret.Replace(" ", String.Empty);
+        }
+
+        public static DateTime? ConvertDate(object date)
+        {
+            try
+            {
+                if (date == null) return null;
+                return Convert.ToDateTime(date);
+            }
+            catch (Exception ex)
+            {
+            }
+            return null;
+        }
+
+        public static string ConvertDateToString(object date, string format)
+        {
+            var dDate = ConvertDate(date);
+            if (dDate == null)
+            {
+                return string.Empty;
+            }
+            else return dDate.Value.ToString(format);
+        }
     }
 }
