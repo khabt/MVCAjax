@@ -81,7 +81,17 @@
             initMap();
         });
 
-        var GMap = {
+
+        var GValue = {
+            txtAddress:"",
+            txtZoom: "",
+            get: function () {
+                GValue.txtAddress = $("#txtAddress").val();
+                GValue.txtZoom = $("#txtZoom").val();
+            }
+        }
+
+        var GMap = {            
             init: function () {
                 GMap.loadMap();
                 GMap.registerEvent();
@@ -94,11 +104,12 @@
                 });
             },
             loadMap: function () {
+                GValue.get();
                 var geocoder = new google.maps.Geocoder();
                 //var address = document.getElementById("address").value;
                 var address = "9812 Pacific Ave, Anaheim, CA";
-                if ($("#txtAddress").val() != "") {
-                    address = $("#txtAddress").val();
+                if (GValue.txtAddress != "") {
+                    address = GValue.txtAddress;
                 }                
 
                 geocoder.geocode({ 'address': address }, function (results, status) {
@@ -116,7 +127,8 @@
                 });
             },
             getMap: function (latLocation, lngLocation, location) {
-                var zoom = $("#txtZoom").val();
+                GValue.get();
+                var zoom = GValue.txtZoom;
                 zoom = parseInt(zoom);
                 var mapOptions = {
                     center: new google.maps.LatLng(latLocation, lngLocation),
@@ -126,16 +138,20 @@
 
                 var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
 
+                var infowindow = new google.maps.InfoWindow({
+                    content: GValue.txtAddress
+                });
+
                 var marker = new google.maps.Marker({
                     position: location,
                     map: map
                 });
+
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
             },
-            getSuggest: function () {
-                //var address = "9812 Pacific Ave, Anaheim, CA";
-                //if ($("#txtAddress").val() != "") {
-                //    address = $("#txtAddress").val();
-                //}
+            getSuggest: function () {                
                 var address = $("[id$='txtAddress']")["0"];
                // var address = document.getElementById('txtAddress');
                 //2 thang nay giong nhau moi ge
