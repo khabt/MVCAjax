@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="../Scripts/bootstrap.js"></script>
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <!--<script src="../Scripts/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/redmond/jquery-ui.css">
+    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9MkKvyFyfXoYuFlet-Z4RXfMJF177Jn4&v=3.exp&libraries=places"></script>
+</head>
+<body>
+    <div>
+        <img src="http://maps.google.com/maps/api/staticmap?center=14.560914,109.062642&markers=color:red%7Clabel:%7C14.560914,109.062642&zoom=18&size=600x400&maptype=satellite&sensor=false&key=AIzaSyD7jjF1HIdKTCwNaN4X_jJTBdrXhWNBL2w" /><br />
+        <div style="margin: 10px" class="ui-widget">
+            <div class="row">
+                <div class="col-sm-4">
+                    <input type="text" id="txtAddress" value="" placeholder="Input Address" autocomplete="on" style="width: 400px;" class="input-group" />                    
+                </div>
+                <div class="col-sm-2">
+                    Zoom <input type="number" id="txtZoom" value="18" style="width: 40px;" />
+                    <input type="button" id="btnFind" onclick="GMap.init();" value="Find" class="btn btn-success" />
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div id="sample" style="width: 587px; height: 400px; padding: 10px">
+
+    </div>
+    <div id="map_canvas" style="width: 587px; height: 400px; padding: 10px"></div>
+    
+    <script>
+        $(document).ready(function () {
+            //var mapOptions = {
+            //    center: new google.maps.LatLng(33.8075488, -117.9619914),
+            //    zoom: 22,
+            //    mapTypeId: google.maps.MapTypeId.HYBRID
+            //};
+
+            //var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+            //function loadMap(latLocation, lngLocation) {
+            //    var mapOptions = {
+            //        center: new google.maps.LatLng(33.8075488, -117.9619914),
+            //        zoom: 22,
+            //        mapTypeId: google.maps.MapTypeId.HYBRID
+            //    };
+
+            //    var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+
+            //}
+
+            //var Map = {
+            //    latLocation: "",
+            //    lngLocation: "",
+            //    getMap: function () {
+            //        var address = encodeURI("9812 Pacific Ave, Anaheim, CA");
+            //        $.ajax({
+            //            type: "POST",
+            //            url: "https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyB9MkKvyFyfXoYuFlet-Z4RXfMJF177Jn4&address=" + address,
+            //            dataType: "json",
+            //            success: function (response) {
+            //                if (response.status == "OK") {
+            //                    latLocation = response.results[0].geometry.location.lat;
+            //                    lngLocation = response.results[0].geometry.location.lng;
+            //                    loadMap
+            //                }
+            //            }
+            //        });
+            //    }
+            //}
+            //GMap.init();
+            initMap();
+        });
+
+        var GMap = {
+            init: function () {
+                GMap.loadMap();
+                GMap.registerEvent();
+            },
+            registerEvent: function () {
+                $("#txtAddress").off('keypress').on('keypress', function (e) {
+                    if (e.which === 13) {
+                        GMap.loadMap();
+                    }
+                });
+            },
+            loadMap: function () {
+                var geocoder = new google.maps.Geocoder();
+                //var address = document.getElementById("address").value;
+                var address = "9812 Pacific Ave, Anaheim, CA";
+                if ($("#txtAddress").val() != "") {
+                    address = $("#txtAddress").val();
+                }                
+
+                geocoder.geocode({ 'address': address }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        // do something with the geocoded result
+                        //
+                        var latitude = results[0].geometry.location.lat();
+                        var longitude = results[0].geometry.location.lng();
+                        var location = results[0].geometry.location;
+
+                        console.log(latitude);
+                        console.log(longitude);
+                        GMap.getMap(latitude, longitude, location);
+                    }
+                });
+            },
+            getMap: function (latLocation, lngLocation, location) {
+                var zoom = $("#txtZoom").val();
+                zoom = parseInt(zoom);
+                var mapOptions = {
+                    center: new google.maps.LatLng(latLocation, lngLocation),
+                    zoom: zoom,
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                };
+
+                var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+            },
+            getSuggest: function () {
+                //var address = "9812 Pacific Ave, Anaheim, CA";
+                //if ($("#txtAddress").val() != "") {
+                //    address = $("#txtAddress").val();
+                //}
+                var address = $("[id$='txtAddress']")["0"];
+               // var address = document.getElementById('txtAddress');
+                //2 thang nay giong nhau moi ge
+                //new google.maps.places.Autocomplete(address);
+
+                //var address = document.getElementById('txtAddress');
+                var autocomplete = new google.maps.places.Autocomplete(address);
+            }
+        }
+
+        GMap.init();
+
+        function init() {
+            var input = document.getElementById('txtAddress');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+        }
+
+        //google.maps.event.addDomListener(window, 'load', init);
+        //google.maps.event.addDomListener(window, 'load', GMap.getSuggest())
+        google.maps.event.addDomListener(window, 'load', GMap.getSuggest)
+    </script>    
+    <script>
+        var geocoder;
+        var map;
+        function codeAddress() {
+            geocoder = new google.maps.Geocoder();
+            var lat = '';
+            var lng = ''
+            var address = "9812 Pacific Ave, Anaheim, CA";
+            if ($("#txtAddress").val() != "") {
+                address = $("#txtAddress").val();
+            }
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    lat = results[0].geometry.location.lat(); //getting the lat
+                    lng = results[0].geometry.location.lng(); //getting the lng
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
+            var latlng = new google.maps.LatLng(lat, lng);
+            var zoom = $("#txtZoom").val();
+            zoom = parseInt(zoom);
+
+            var myOptions = {
+                zoom: zoom,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            }
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        }
+        window.onload = function () {
+            codeAddress();
+        }
+        //var list = ["Cafe Goc pho", "90 Yên Thế"];
+
+        //$("#txtAddress").autocomplete({
+        //    source: list,
+        //    onSelect: function (suggestion) {
+        //        console.log(suggestion);
+        //    }
+        //})
+
+       
+    </script>
+
+    <!--<div id="map"></div>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: { lat: -34.397, lng: 150.644 }
+            });
+            var geocoder = new google.maps.Geocoder();
+
+            geocodeAddress(geocoder, map);
+
+            //document.getElementById('submit').addEventListener('click', function () {
+
+            //});
+        }
+
+        function geocodeAddress(geocoder, resultsMap) {
+            //var address = document.getElementById('address').value;
+            var address = "9812 Pacific Ave, Anaheim, CA";
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+
+        //function loadMap() {
+        //    var geocoder = new google.maps.Geocoder();
+        //    //var address = document.getElementById("address").value;
+        //    var address = "9812 Pacific Ave, Anaheim, CA";
+        //    geocoder.geocode({ 'address': address }, function (results, status) {
+        //        if (status == google.maps.GeocoderStatus.OK) {
+        //            // do something with the geocoded result
+        //            //
+        //            var latitude = results[0].geometry.location.latitude
+        //            var longitude = results[0].geometry.location.longitude
+        //            console.log(latitude);
+        //            console.log(longitude);
+        //        }
+        //    });
+        //}
+
+    </script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyB9MkKvyFyfXoYuFlet-Z4RXfMJF177Jn4&callback=initMap"></script>-->
+
+
+    <div id="mylocation" style="width: 587px; height: 400px; padding: 10px"></div>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+          map = new google.maps.Map(document.getElementById('mylocation'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 18,
+          mapTypeId: google.maps.MapTypeId.HYBRID
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+
+</body>
+</html>

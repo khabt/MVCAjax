@@ -218,6 +218,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Html\GoogleMap_Exam.html" />
     <Content Include="Html\Images\HE_Quote\battery.png" />
     <Content Include="Html\Images\HE_Quote\Icon.png" />
     <Content Include="Html\Images\HE_Quote\LedLighting.png" />
